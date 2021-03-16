@@ -14,9 +14,11 @@ function App() {
   const [watchList, setWatchList] = useState([])
   const [pageCounter, setPageCounter] = useState(1)
   const [type, setType] = useState('movie')
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     getMovies()
+    console.log('test from use effect')
   }, [pageCounter, type])
 
   function getMovies() {
@@ -27,6 +29,7 @@ function App() {
       .then((data) => {
         //console.log(data)
         setMovies(data.Search)
+        setLoaded(true)
       })
       .catch((err) => {
         console.log(err)
@@ -62,7 +65,7 @@ function App() {
       <NavBase>
         <h2 onClick={() => setType('movie')}>Movies</h2>
         <h2 onClick={() => setType('series')}>Series</h2>
-        <h2>My Watchlist</h2>
+        <h2 onClick={() => setMovies(watchList)}>My Watchlist</h2>
       </NavBase>
       <MainBase>
         {movies &&

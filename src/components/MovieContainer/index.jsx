@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 //import { Star } from 'phosphor-react'
 
@@ -6,10 +6,9 @@ const MovieContainer = ({ movie, watchList, setWatchList }) => {
   const [active, setActive] = useState(false)
 
   function handleClick(title, id) {
-    //console.log(title, id)
+    console.log(title, id)
     if (active === true) {
       setActive(false)
-      //watchList.filter(el)
     } else {
       setActive(true)
       setWatchList([...watchList, { movie }])
