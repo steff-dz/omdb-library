@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import GlobalStyle from './components/GlobalStyle'
 import styled from 'styled-components'
-import { MagnifyingGlass } from 'phosphor-react'
 import { BroswerRouter as Router, Rout, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import MovieContainer from './components/MovieContainer'
@@ -11,7 +10,7 @@ const apiKey = process.env.OMDB_KEY
 function App() {
   const [movies, setMovies] = useState([])
   const [query, setQuery] = useState('star wars')
-
+  const [watchList, setWatchList] = useState([])
   // useEffect(() => {
   //   if (movies.length > 0) {
   //     console.log(movies[1].Title)
@@ -41,11 +40,10 @@ function App() {
     <>
       <GlobalStyle />
       <Header />
-
       <FormBase>
         <input type="text" placeholder="star wars"></input>
         <button>
-          <MagnifyingGlass size={20} />
+          <i class="fas fa-search"></i>
         </button>
       </FormBase>
 
@@ -57,7 +55,12 @@ function App() {
       <MainBase>
         {movies &&
           movies.map((el) => (
-            <MovieContainer key={el.imdbID} title={el.Title} poster={el.Poster} />
+            <MovieContainer
+              key={el.imdbID}
+              movie={el}
+              watchList={watchList}
+              setWatchList={setWatchList}
+            />
           ))}
       </MainBase>
     </>
@@ -86,9 +89,9 @@ const NavBase = styled.nav`
 
 const MainBase = styled.main`
   border: 1px solid lightblue;
-  min-height: 70vh;
+  min-height: fit-content;
   width: 100%;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;

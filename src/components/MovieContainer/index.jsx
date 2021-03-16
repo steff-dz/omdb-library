@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
+//import { Star } from 'phosphor-react'
 
-const MovieContainer = ({ title, poster }) => {
-  //console.log(poster)
+const MovieContainer = ({ movie, watchList, setWatchList }) => {
+  const starIcon = useRef(null)
+  const [selectedMovie, setSelectedMovie] = useState(null)
+  const [active, setActive] = useState(false)
+
+  function handleClick(title, id) {
+    console.log(title, id)
+    if (active === true) {
+      setActive(false)
+    } else {
+      setActive(true)
+      setWatchList([...watchList, { movie }])
+    }
+  }
+
   return (
     <ArticleBase>
-      <img src={poster}></img>
+      <i
+        onClick={() => handleClick(movie.Title, movie.imdbID)}
+        className={active ? 'fas fa-star' : 'far fa-star'}
+      ></i>
+      <img src={movie.Poster}></img>
     </ArticleBase>
   )
 }
@@ -13,12 +31,25 @@ const MovieContainer = ({ title, poster }) => {
 const ArticleBase = styled.article`
   border: 1px solid black;
   background-color: grey;
-  height: 150px;
+  height: 210px;
   width: 150px;
   overflow: hidden;
+  position: relative;
+
+  .fa-star {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    color: yellow;
+  }
 
   img {
-    width: 150px;
+    /* object-fit: fill; */
+    height: 100%;
+    width: 100%;
+    /* width: 100%;
+    height: auto;
+    object-fit: cover; */
   }
 `
 
