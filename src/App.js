@@ -12,11 +12,6 @@ function App() {
   const [query, setQuery] = useState('star wars')
   const [watchList, setWatchList] = useState([])
   const [pageCounter, setPageCounter] = useState(1)
-  // useEffect(() => {
-  //   if (movies.length > 0) {
-  //     console.log(movies[1].Title)
-  //   }
-  // }, [movies])
 
   useEffect(() => {
     getMovies()
@@ -29,7 +24,6 @@ function App() {
         return response.json()
       })
       .then((data) => {
-        //this made an infinite loop: console.log(data). Why?
         //console.log(data)
         setMovies(data.Search)
       })
@@ -38,29 +32,18 @@ function App() {
       })
   }
 
-  // function handleNextPage() {
-  //   console.log('click')
-  //   setPageCounter(pageCounter + 1)
-  //   fetch(`http://www.omdbapi.com/?s=${query}&page=${pageCounter}&apikey=${apiKey}`)
-  //     .then((response) => {
-  //       return response.json()
-  //     })
-  //     .then((data) => {
-  //       console.log(data)
-  //       setMovies(data.Search)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log('hey there from the from')
+  }
 
   return (
     <>
       <GlobalStyle />
       <Header />
-      <FormBase>
+      <FormBase name="omdb-search" onSubmit={(e) => handleSubmit(e)}>
         <input type="text" placeholder="star wars"></input>
-        <button>
+        <button type="submit">
           <i className="fas fa-search"></i>
         </button>
       </FormBase>
@@ -80,11 +63,11 @@ function App() {
               setWatchList={setWatchList}
             />
           ))}
-        <div>
-          <button onClick={() => setPageCounter(pageCounter - 1)}>Back</button>
-          <button onClick={() => setPageCounter(pageCounter + 1)}>Next 10</button>
-        </div>
       </MainBase>
+      <ButtonContainer>
+        <button onClick={() => setPageCounter(pageCounter - 1)}>Back</button>
+        <button onClick={() => setPageCounter(pageCounter + 1)}>Next 10</button>
+      </ButtonContainer>
     </>
   )
 }
@@ -102,7 +85,7 @@ const FormBase = styled.form`
 const NavBase = styled.nav`
   /* border: 1px solid lightpink; */
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   h2 {
     font-size: 1rem;
     font-weight: 100;
@@ -117,6 +100,12 @@ const MainBase = styled.main`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  justify-content: center;
+`
+
+const ButtonContainer = styled.div`
+  border: 1px solid black;
+  display: flex;
   justify-content: center;
 `
 export default App
