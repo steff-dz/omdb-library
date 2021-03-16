@@ -11,6 +11,7 @@ function App() {
   const [movies, setMovies] = useState([])
   const [query, setQuery] = useState('star wars')
   const [watchList, setWatchList] = useState([])
+  const [pageCounter, setPageCounter] = useState(1)
   // useEffect(() => {
   //   if (movies.length > 0) {
   //     console.log(movies[1].Title)
@@ -19,22 +20,39 @@ function App() {
 
   useEffect(() => {
     getMovies()
-  }, [])
+  }, [pageCounter])
 
   //should put the first part of this URL into it's own variable:http://www.omdbapi.com/
   function getMovies() {
-    fetch(`http://www.omdbapi.com/?s=${query}&apikey=${apiKey}`)
+    fetch(`http://www.omdbapi.com/?s=${query}&page=${pageCounter}&apikey=${apiKey}`)
       .then((response) => {
         return response.json()
       })
       .then((data) => {
         //this made an infinite loop: console.log(data). Why?
+        //console.log(data)
         setMovies(data.Search)
       })
       .catch((err) => {
         console.log(err)
       })
   }
+
+  // function handleNextPage() {
+  //   console.log('click')
+  //   setPageCounter(pageCounter + 1)
+  //   fetch(`http://www.omdbapi.com/?s=${query}&page=${pageCounter}&apikey=${apiKey}`)
+  //     .then((response) => {
+  //       return response.json()
+  //     })
+  //     .then((data) => {
+  //       console.log(data)
+  //       setMovies(data.Search)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }
 
   return (
     <>
@@ -43,7 +61,7 @@ function App() {
       <FormBase>
         <input type="text" placeholder="star wars"></input>
         <button>
-          <i class="fas fa-search"></i>
+          <i className="fas fa-search"></i>
         </button>
       </FormBase>
 
@@ -62,6 +80,10 @@ function App() {
               setWatchList={setWatchList}
             />
           ))}
+        <div>
+          <button onClick={() => setPageCounter(pageCounter - 1)}>Back</button>
+          <button onClick={() => setPageCounter(pageCounter + 1)}>Next 10</button>
+        </div>
       </MainBase>
     </>
   )
