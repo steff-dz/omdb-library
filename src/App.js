@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import GlobalStyle from './components/GlobalStyle'
 import styled from 'styled-components'
+import { v4 as uuidv4 } from 'uuid'
 import { BroswerRouter as Router, Rout, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import MovieContainer from './components/MovieContainer'
@@ -16,9 +17,8 @@ function App() {
 
   useEffect(() => {
     getMovies()
-  }, [pageCounter])
+  }, [pageCounter, type])
 
-  //should put the first part of this URL into it's own variable:http://www.omdbapi.com/
   function getMovies() {
     fetch(`http://www.omdbapi.com/?s=${query}&type=${type}&page=${pageCounter}&apikey=${apiKey}`)
       .then((response) => {
@@ -43,11 +43,6 @@ function App() {
     setQuery(e.target.value)
   }
 
-  function handleFilter(category) {
-    setType(category)
-    getMovies()
-  }
-
   return (
     <>
       <GlobalStyle />
@@ -65,15 +60,15 @@ function App() {
       </FormBase>
 
       <NavBase>
-        <h2 onClick={() => handleFilter('movie')}>Movies</h2>
-        <h2 onClick={() => handleFilter('series')}>Series</h2>
+        <h2 onClick={() => setType('movie')}>Movies</h2>
+        <h2 onClick={() => setType('series')}>Series</h2>
         <h2>My Watchlist</h2>
       </NavBase>
       <MainBase>
         {movies &&
           movies.map((el) => (
             <MovieContainer
-              key={el.imdbID}
+              key={uuidv4()}
               movie={el}
               watchList={watchList}
               setWatchList={setWatchList}
