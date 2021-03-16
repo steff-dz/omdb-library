@@ -12,6 +12,7 @@ function App() {
   const [query, setQuery] = useState('star wars')
   const [watchList, setWatchList] = useState([])
   const [pageCounter, setPageCounter] = useState(1)
+  const [type, setType] = useState('movie')
 
   useEffect(() => {
     getMovies()
@@ -19,7 +20,7 @@ function App() {
 
   //should put the first part of this URL into it's own variable:http://www.omdbapi.com/
   function getMovies() {
-    fetch(`http://www.omdbapi.com/?s=${query}&page=${pageCounter}&apikey=${apiKey}`)
+    fetch(`http://www.omdbapi.com/?s=${query}&type=${type}&page=${pageCounter}&apikey=${apiKey}`)
       .then((response) => {
         return response.json()
       })
@@ -34,7 +35,17 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    console.log('hey there from the from')
+    getMovies()
+    setQuery('')
+  }
+
+  function handleInput(e) {
+    setQuery(e.target.value)
+  }
+
+  function handleFilter(category) {
+    setType(category)
+    getMovies()
   }
 
   return (
@@ -42,15 +53,20 @@ function App() {
       <GlobalStyle />
       <Header />
       <FormBase name="omdb-search" onSubmit={(e) => handleSubmit(e)}>
-        <input type="text" placeholder="star wars"></input>
+        <input
+          onClick={() => setQuery('')}
+          onChange={(e) => handleInput(e)}
+          value={query}
+          type="text"
+        ></input>
         <button type="submit">
           <i className="fas fa-search"></i>
         </button>
       </FormBase>
 
       <NavBase>
-        <h2>Movies</h2>
-        <h2>Series</h2>
+        <h2 onClick={() => handleFilter('movie')}>Movies</h2>
+        <h2 onClick={() => handleFilter('series')}>Series</h2>
         <h2>My Watchlist</h2>
       </NavBase>
       <MainBase>
