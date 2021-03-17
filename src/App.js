@@ -28,6 +28,7 @@ function App() {
       })
       .then((data) => {
         //console.log(data)
+
         setMovies(data.Search)
         setLoaded(true)
       })
