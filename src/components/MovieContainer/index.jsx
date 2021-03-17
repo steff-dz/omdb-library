@@ -10,7 +10,7 @@ const MovieContainer = ({ movie, watchList, setWatchList }) => {
 
   function handleClick(movie) {
     if (movie.selected === true) {
-      const starClass = starRef.current
+      let starClass = starRef.current
       starClass.className = 'far fa-star'
       movie.selected = false
       setWatchList(watchList.filter((el) => el.imdbID !== movie.imdbID))
