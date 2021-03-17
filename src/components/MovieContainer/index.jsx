@@ -4,38 +4,18 @@ import styled from 'styled-components'
 
 const MovieContainer = ({ movie, watchList, setWatchList }) => {
   const [active, setActive] = useState(false)
-  const [toggle, setToggle] = useState(false)
 
-  useEffect(() => {
-    console.log(active)
-  }, [active])
-
-  function handleClick(title, id) {
-    //console.log(title, id)
-    //if (active === false) {
-    //setActive(true)
-
-    //if (prev !== true)
-    setActive((prev) => {
-      if (prev !== false) {
-        setWatchList([...watchList, { movie }])
-      }
-      return !prev
-    })
-
-    //setWatchList([...watchList, { movie }])
-
-    //} else {
-    //setActive(false)
-
-    //}
+  function handleClick(movie) {
+    movie.selected = true
+    setWatchList([...watchList, movie])
+    return movie
   }
 
   return (
     <ArticleBase>
       <i
-        onClick={() => handleClick(movie.Title, movie.imdbID)}
-        className={active ? 'fas fa-star' : 'far fa-star'}
+        onClick={() => handleClick(movie)}
+        className={`${movie.selected ? 'fas fa-star' : 'far fa-star'} `}
       ></i>
       <img src={movie.Poster}></img>
     </ArticleBase>
