@@ -15,7 +15,7 @@ function App() {
   //const [watchList, setWatchList] = useState([])
   const [pageCounter, setPageCounter] = useState(1)
   const [type, setType] = useState('movie')
-  const [loaded, setLoaded] = useState(false)
+  //const [loaded, setLoaded] = useState(false)
   const watchList = useWatchList()
 
   useEffect(() => {
@@ -73,7 +73,7 @@ function App() {
       <NavBase>
         <h2 onClick={() => setType('movie')}>Movies</h2>
         <h2 onClick={() => setType('series')}>Series</h2>
-        <h2>My Watchlist</h2>
+        <h2 onClick={() => setMovies(watchList.mediaLines)}>My Watch List</h2>
       </NavBase>
       <MainBase>
         {movies && movies.map((el) => <MovieContainer key={uuidv4()} movie={el} />)}

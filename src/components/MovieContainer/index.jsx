@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { useWatchList } from '../../utils/WatchListCntxt'
+import { useActiveToggle } from '../../utils/ActiveContext'
 
 const MovieContainer = ({ movie }) => {
-  const [active, setActive] = useState(false)
+  //const [active, setActive] = useState(false)
   const watchList = useWatchList()
-
-  useEffect(() => {}, [active])
+  const activeToggle = useActiveToggle()
 
   //let active = false
 
@@ -14,23 +14,25 @@ const MovieContainer = ({ movie }) => {
 
   //let iconRef = useRef(null)
 
+  // useEffect(() => {
+
+  // }, [watchList.mediaLines])
+
   function handleClick(movie) {
-    //console.log(e.target.className)
-    // let className = e.target.className
-    // console.log(className)
-    // className = 'fas fa-star'
-    // console.log(className)
-    watchList.addMediaLine(movie)
-    setActive((prev) => {
-      return !prev
-    })
+    if (movie.selected === true) {
+      movie.selected = !movie.selected
+      return movie
+    } else {
+      movie.selected = true
+      watchList.addMediaLine(movie)
+    }
   }
 
   return (
     <ArticleBase>
       <i
         onClick={(e) => handleClick(movie, e)}
-        className={active ? 'fas fa-star' : 'far fa-star'}
+        className={movie.selected ? 'fas fa-star' : 'far fa-star'}
       ></i>
       <img src={movie.Poster}></img>
     </ArticleBase>
@@ -40,7 +42,7 @@ const MovieContainer = ({ movie }) => {
 const ArticleBase = styled.article`
   border: 1px solid black;
   background-color: grey;
-  height: fit-content;
+  height: 250px;
   width: 150px;
   overflow: hidden;
   position: relative;
