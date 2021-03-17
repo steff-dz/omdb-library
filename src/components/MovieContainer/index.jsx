@@ -1,13 +1,26 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import styled from 'styled-components'
-//import { Star } from 'phosphor-react'
+import { useWatchList } from '../../utils/WatchListCntxt'
 
-const MovieContainer = ({ movie, watchList, setWatchList }) => {
+const MovieContainer = ({ movie }) => {
   const [active, setActive] = useState(false)
+  const watchList = useWatchList()
+
+  useEffect(() => {}, [active])
+
+  //let active = false
 
   //console.log('re-render from movie')
 
+  //let iconRef = useRef(null)
+
   function handleClick(movie) {
+    //console.log(e.target.className)
+    // let className = e.target.className
+    // console.log(className)
+    // className = 'fas fa-star'
+    // console.log(className)
+    watchList.addMediaLine(movie)
     setActive((prev) => {
       return !prev
     })
@@ -15,7 +28,10 @@ const MovieContainer = ({ movie, watchList, setWatchList }) => {
 
   return (
     <ArticleBase>
-      <i onClick={() => handleClick(movie)} className={active ? 'fas fa-star' : 'far fa-star'}></i>
+      <i
+        onClick={(e) => handleClick(movie, e)}
+        className={active ? 'fas fa-star' : 'far fa-star'}
+      ></i>
       <img src={movie.Poster}></img>
     </ArticleBase>
   )
@@ -24,7 +40,7 @@ const MovieContainer = ({ movie, watchList, setWatchList }) => {
 const ArticleBase = styled.article`
   border: 1px solid black;
   background-color: grey;
-  height: 210px;
+  height: fit-content;
   width: 150px;
   overflow: hidden;
   position: relative;

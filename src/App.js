@@ -2,21 +2,21 @@ import React, { useState, useEffect } from 'react'
 import GlobalStyle from './components/GlobalStyle'
 import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
-import { BroswerRouter as Router, Rout, Switch } from 'react-router-dom'
+//import { BroswerRouter as Router, Rout, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import MovieContainer from './components/MovieContainer'
+import { useWatchList } from './utils/WatchListCntxt'
 
 const apiKey = process.env.OMDB_KEY
 
 function App() {
   const [movies, setMovies] = useState([])
   const [query, setQuery] = useState('star wars')
-  const [watchList, setWatchList] = useState([])
+  //const [watchList, setWatchList] = useState([])
   const [pageCounter, setPageCounter] = useState(1)
   const [type, setType] = useState('movie')
   const [loaded, setLoaded] = useState(false)
-
-  //console.log('re-render')
+  const watchList = useWatchList()
 
   useEffect(() => {
     getMovies()
@@ -73,18 +73,10 @@ function App() {
       <NavBase>
         <h2 onClick={() => setType('movie')}>Movies</h2>
         <h2 onClick={() => setType('series')}>Series</h2>
-        <h2 onClick={() => setMovies(watchList)}>My Watchlist</h2>
+        <h2>My Watchlist</h2>
       </NavBase>
       <MainBase>
-        {movies &&
-          movies.map((el) => (
-            <MovieContainer
-              key={uuidv4()}
-              movie={el}
-              watchList={watchList}
-              setWatchList={setWatchList}
-            />
-          ))}
+        {movies && movies.map((el) => <MovieContainer key={uuidv4()} movie={el} />)}
       </MainBase>
       <ButtonContainer>
         <button onClick={() => setPageCounter(pageCounter - 1)}>Back</button>
