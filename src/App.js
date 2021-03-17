@@ -16,19 +16,26 @@ function App() {
   const [type, setType] = useState('movie')
   const [loaded, setLoaded] = useState(false)
 
+  console.log('re-render')
+
   useEffect(() => {
     getMovies()
     console.log('test from use effect')
+    console.log(query, type, pageCounter)
   }, [pageCounter, type])
 
+  useEffect(() => {
+    console.log(query)
+  }, [query])
+
   function getMovies() {
+    setMovies('')
     fetch(`http://www.omdbapi.com/?s=${query}&type=${type}&page=${pageCounter}&apikey=${apiKey}`)
       .then((response) => {
         return response.json()
       })
       .then((data) => {
         //console.log(data)
-
         setMovies(data.Search)
         setLoaded(true)
       })
@@ -40,7 +47,7 @@ function App() {
   function handleSubmit(e) {
     e.preventDefault()
     getMovies()
-    setQuery('')
+    //setQuery('')
   }
 
   function handleInput(e) {
