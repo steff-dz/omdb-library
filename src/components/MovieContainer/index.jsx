@@ -4,15 +4,31 @@ import styled from 'styled-components'
 
 const MovieContainer = ({ movie, watchList, setWatchList }) => {
   const [active, setActive] = useState(false)
+  const [toggle, setToggle] = useState(false)
+
+  useEffect(() => {
+    console.log(active)
+  }, [active])
 
   function handleClick(title, id) {
-    console.log(title, id)
-    if (active === true) {
-      setActive(false)
-    } else {
-      setActive(true)
-      setWatchList([...watchList, { movie }])
-    }
+    //console.log(title, id)
+    //if (active === false) {
+    //setActive(true)
+
+    //if (prev !== true)
+    setActive((prev) => {
+      if (prev !== false) {
+        setWatchList([...watchList, { movie }])
+      }
+      return !prev
+    })
+
+    //setWatchList([...watchList, { movie }])
+
+    //} else {
+    //setActive(false)
+
+    //}
   }
 
   return (
