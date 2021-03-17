@@ -6,7 +6,7 @@ const MovieContainer = ({ movie, watchList, setWatchList }) => {
   //const [active, setActive] = useState(false)
   let starRef = useRef(null)
 
-  console.log('re-render from movie')
+  //console.log('re-render from movie')
 
   function handleClick(movie) {
     if (movie.selected === true) {
