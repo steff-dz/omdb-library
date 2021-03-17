@@ -3,30 +3,19 @@ import styled from 'styled-components'
 //import { Star } from 'phosphor-react'
 
 const MovieContainer = ({ movie, watchList, setWatchList }) => {
-  //const [active, setActive] = useState(false)
-  let starRef = useRef(null)
+  const [active, setActive] = useState(false)
 
-  console.log('re-render from movie')
+  //console.log('re-render from movie')
 
   function handleClick(movie) {
-    if (movie.selected === true) {
-      const starClass = starRef.current
-      starClass.className = 'far fa-star'
-      movie.selected = false
-      setWatchList(watchList.filter((el) => el.imdbID !== movie.imdbID))
-    } else {
-      movie.selected = true
-      setWatchList([...watchList, movie])
-    }
+    setActive((prev) => {
+      return !prev
+    })
   }
 
   return (
     <ArticleBase>
-      <i
-        ref={starRef}
-        onClick={() => handleClick(movie)}
-        className={`${movie.selected ? 'fas fa-star' : 'far fa-star'} `}
-      ></i>
+      <i onClick={() => handleClick(movie)} className={active ? 'fas fa-star' : 'far fa-star'}></i>
       <img src={movie.Poster}></img>
     </ArticleBase>
   )

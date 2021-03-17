@@ -16,17 +16,17 @@ function App() {
   const [type, setType] = useState('movie')
   const [loaded, setLoaded] = useState(false)
 
-  console.log('re-render')
+  //console.log('re-render')
 
   useEffect(() => {
     getMovies()
-    console.log('test from use effect')
-    console.log(query, type, pageCounter)
+    //console.log('test from use effect')
+    //console.log(query, type, pageCounter)
   }, [pageCounter, type])
 
   useEffect(() => {
-    console.log(query)
-  }, [query])
+    getMovies()
+  }, [])
 
   function getMovies() {
     setMovies('')
@@ -37,7 +37,7 @@ function App() {
       .then((data) => {
         //console.log(data)
         setMovies(data.Search)
-        setLoaded(true)
+        //setLoaded(true)
       })
       .catch((err) => {
         console.log(err)
