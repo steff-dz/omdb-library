@@ -5,6 +5,7 @@
 
 export const lightTheme = {
   pageBackground: 'white',
+  fontColor: 'black',
 }
 
 export const darkTheme = {

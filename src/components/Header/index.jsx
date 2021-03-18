@@ -10,7 +10,6 @@ const Header = (props) => {
 }
 
 const HeaderBase = styled.header`
-  /* border: 1px solid lightgrey; */
   text-align: center;
   background-color: ${(props) => props.theme.pageBackground};
   color: ${(props) => props.theme.fontColor};
