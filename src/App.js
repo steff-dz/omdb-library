@@ -14,45 +14,12 @@ function App() {
   const [watchList, setWatchList] = useState([])
   const [pageCounter, setPageCounter] = useState(1)
   const [type, setType] = useState('movie')
-  const [loaded, setLoaded] = useState(false)
-  const [listDisplay, setListDisplay] = useState(null)
 
   console.log('re-render')
-  //handleCheck()
 
   useEffect(() => {
     getMovies()
   }, [pageCounter, type])
-
-  // useEffect(() => {
-  //   if (listDisplay === null) {
-  //     console.log('its null', listDisplay)
-  //   } else if (listDisplay === true) {
-  //     console.log('its on', listDisplay)
-  //   } else if (listDisplay === false) {
-  //     console.log('its false', listDisplay)
-  //   }
-  // }, [listDisplay])
-
-  // useEffect(() => {
-  //   setMovies(watchList)
-  // }, [watchList])
-
-  // useEffect(() => {
-  //   if (watchListToggle === null) {
-  //     console.log('its null')
-  //   } else if (watchListToggle === true) {
-  //     console.log('its true')
-  //   } else if (watchListToggle === false) {
-  //     console.log(watchListToggle)
-  //     setMovies(watchList)
-  //     setWatchListToggle(null)
-  //   }
-  // }, [watchListToggle])
-
-  // useEffect(() => {
-  //   console.log(query)
-  // }, [query])
 
   function getMovies() {
     setMovies('')
@@ -61,11 +28,7 @@ function App() {
         return response.json()
       })
       .then((data) => {
-        const res = data.Search
-        res.forEach((el) => (el.selected = false))
-
-        setMovies(res)
-        //setMovies(data.Search)
+        setMovies(data.Search)
       })
       .catch((err) => {
         console.log(err)
@@ -94,7 +57,6 @@ function App() {
   function showUserList() {
     //setWatchListToggle(true)
     setMovies(watchList)
-    //console.log(watchListToggle)
   }
 
   return (
@@ -116,7 +78,7 @@ function App() {
       <NavBase>
         <h2 onClick={() => setType('movie')}>Movies</h2>
         <h2 onClick={() => setType('series')}>Series</h2>
-        <h2 onClick={() => showUserList()}>My Watchlist</h2>
+        <h2 onClick={() => setMovies(watchList)}>My Watchlist</h2>
       </NavBase>
       <MainBase>
         {movies &&
