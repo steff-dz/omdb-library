@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import GlobalStyle from './components/GlobalStyle'
 import styled from 'styled-components'
+import { ThemeProvider } from 'styled-components'
+import { themes } from './utils/theme'
+import GlobalStyle from './components/GlobalStyle'
+
 import { v4 as uuidv4 } from 'uuid'
 import { BroswerRouter as Router, Rout, Switch } from 'react-router-dom'
 import Header from './components/Header'
@@ -14,6 +17,7 @@ function App() {
   const [watchList, setWatchList] = useState([])
   const [pageCounter, setPageCounter] = useState(1)
   const [type, setType] = useState('movie')
+  const [theme, setTheme] = useState('light')
 
   console.log('re-render')
 
@@ -61,44 +65,46 @@ function App() {
 
   return (
     <>
-      <GlobalStyle />
-      <Header />
-      <FormBase name="omdb-search" onSubmit={(e) => handleSubmit(e)}>
-        <input
-          onClick={() => setQuery('')}
-          onChange={(e) => handleInput(e)}
-          value={query}
-          type="text"
-        ></input>
-        <button type="submit">
-          <i className="fas fa-search"></i>
-        </button>
-      </FormBase>
+      <ThemeProvider theme={themes[theme]}>
+        <GlobalStyle />
+        <Header theme={theme} />
+        <FormBase name="omdb-search" onSubmit={(e) => handleSubmit(e)}>
+          <input
+            onClick={() => setQuery('')}
+            onChange={(e) => handleInput(e)}
+            value={query}
+            type="text"
+          ></input>
+          <button type="submit">
+            <i className="fas fa-search"></i>
+          </button>
+        </FormBase>
 
-      <NavBase>
-        <h2 onClick={() => setType('movie')}>Movies</h2>
-        <h2 onClick={() => setType('series')}>Series</h2>
-        <h2 onClick={() => setMovies(watchList)}>My Watchlist</h2>
-      </NavBase>
-      <MainBase>
-        {movies &&
-          movies.map((el) => (
-            <MovieContainer
-              key={uuidv4()}
-              movie={el}
-              starred={Boolean(
-                watchList.find((item) => {
-                  return item.imdbID === el.imdbID
-                })
-              )}
-              clickHandler={() => handleClick(el)}
-            />
-          ))}
-      </MainBase>
-      <ButtonContainer>
-        <button onClick={() => setPageCounter(pageCounter - 1)}>Back</button>
-        <button onClick={() => setPageCounter(pageCounter + 1)}>Next 10</button>
-      </ButtonContainer>
+        <NavBase>
+          <h2 onClick={() => setType('movie')}>Movies</h2>
+          <h2 onClick={() => setType('series')}>Series</h2>
+          <h2 onClick={() => setMovies(watchList)}>My Watchlist</h2>
+        </NavBase>
+        <MainBase>
+          {movies &&
+            movies.map((el) => (
+              <MovieContainer
+                key={uuidv4()}
+                movie={el}
+                starred={Boolean(
+                  watchList.find((item) => {
+                    return item.imdbID === el.imdbID
+                  })
+                )}
+                clickHandler={() => handleClick(el)}
+              />
+            ))}
+        </MainBase>
+        <ButtonContainer>
+          <button onClick={() => setPageCounter(pageCounter - 1)}>Back</button>
+          <button onClick={() => setPageCounter(pageCounter + 1)}>Next 10</button>
+        </ButtonContainer>
+      </ThemeProvider>
     </>
   )
 }
@@ -132,6 +138,7 @@ const MainBase = styled.main`
   flex-wrap: wrap;
   gap: 0.5rem;
   justify-content: center;
+  background-color: ${(props) => props.theme.pageBackground};
 `
 
 const ButtonContainer = styled.div`
