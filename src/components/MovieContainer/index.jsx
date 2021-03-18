@@ -8,7 +8,6 @@ const MovieContainer = ({ movie, starred, clickHandler }) => {
   //   console.log('not in list')
   // } else {
   //   console.log('its in the list')
-  // }
 
   return (
     <ArticleBase>
