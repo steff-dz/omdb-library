@@ -16,11 +16,14 @@ function App() {
   const [type, setType] = useState('movie')
   const [loaded, setLoaded] = useState(false)
 
-  //console.log('re-render')
+  console.log('re-render')
+  //handleCheck()
 
   useEffect(() => {
     getMovies()
   }, [pageCounter, type])
+
+  useEffect(() => {}, [watchList])
 
   // useEffect(() => {
   //   console.log(query)
@@ -54,6 +57,15 @@ function App() {
     setQuery(e.target.value)
   }
 
+  function handleClick(movie) {
+    let movieCheck = watchList.find((el) => el.imdbID === movie.imdbID)
+    if (movieCheck) {
+      setWatchList(watchList.filter((el) => el.imdbID !== movie.imdbID))
+    } else {
+      setWatchList([...watchList, movie])
+    }
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -81,8 +93,12 @@ function App() {
             <MovieContainer
               key={uuidv4()}
               movie={el}
-              watchList={watchList}
-              setWatchList={setWatchList}
+              starred={Boolean(
+                watchList.find((item) => {
+                  return item.imdbID === el.imdbID
+                })
+              )}
+              clickHandler={() => handleClick(el)}
             />
           ))}
       </MainBase>
@@ -134,3 +150,5 @@ export default App
 
 //To get the next page:
 //Search pagination added: http://www.omdbapi.com/?s=Batman&page=2
+
+//starred={watchList.filter((movie) => movie.imdbID === el.imdbID)}

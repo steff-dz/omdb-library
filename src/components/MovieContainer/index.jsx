@@ -2,31 +2,17 @@ import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 //import { Star } from 'phosphor-react'
 
-const MovieContainer = ({ movie, watchList, setWatchList }) => {
-  //const [active, setActive] = useState(false)
-  let starRef = useRef(null)
-
+const MovieContainer = ({ movie, starred, clickHandler }) => {
   //console.log('re-render from movie')
-
-  function handleClick(movie) {
-    if (movie.selected === true) {
-      let starClass = starRef.current
-      starClass.className = 'far fa-star'
-      movie.selected = false
-      setWatchList(watchList.filter((el) => el.imdbID !== movie.imdbID))
-    } else {
-      movie.selected = true
-      setWatchList([...watchList, movie])
-    }
-  }
+  // if (starred.length === 0) {
+  //   console.log('not in list')
+  // } else {
+  //   console.log('its in the list')
+  // }
 
   return (
     <ArticleBase>
-      <i
-        ref={starRef}
-        onClick={() => handleClick(movie)}
-        className={`${movie.selected ? 'fas fa-star' : 'far fa-star'} `}
-      ></i>
+      <i onClick={() => clickHandler()} className={starred ? 'fas fa-star' : 'far fa-star'}></i>
       <img src={movie.Poster}></img>
     </ArticleBase>
   )
@@ -63,6 +49,18 @@ export default MovieContainer
 //className={`${movie.selected ? 'fas fa-star' : 'far fa-star'} `}
 // if (movie.selected === true) {
 //   const starClass = starRef.current
+//   starClass.className = 'far fa-star'
+//   movie.selected = false
+//   setWatchList(watchList.filter((el) => el.imdbID !== movie.imdbID))
+// } else {
+//   movie.selected = true
+//   setWatchList([...watchList, movie])
+// }
+
+//className={`${movie.selected ? 'fas fa-star' : 'far fa-star'} `}
+
+// if (movie.selected === true) {
+//   let starClass = starRef.current
 //   starClass.className = 'far fa-star'
 //   movie.selected = false
 //   setWatchList(watchList.filter((el) => el.imdbID !== movie.imdbID))
