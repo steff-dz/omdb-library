@@ -69,7 +69,7 @@ const LandingPage = ({ watchList, clickHandler }) => {
           ))}
         <ButtonContainer>
           <button onClick={() => setPageCounter(pageCounter - 1)}>Back</button>
-          <button onClick={() => setPageCounter(pageCounter + 1)}>Next 10</button>
+          <button onClick={() => setPageCounter(pageCounter + 1)}>Next</button>
         </ButtonContainer>
       </MainBase>
     </>
@@ -77,33 +77,50 @@ const LandingPage = ({ watchList, clickHandler }) => {
 }
 
 const FormBase = styled.form`
-  /* border: 1px solid lightgrey; */
   display: flex;
   justify-content: center;
   margin: ${(props) => props.theme.spacing[2]} 0rem;
-
-  /* margin-bottom: ${(props) => props.theme.spacing[2]}; */
   width: 100%;
   padding-left: ${(props) => props.theme.spacing[2]};
   input {
-    background-color: lightgrey;
+    /* background-color: rgba(242, 242, 242, 0.178); */
+    background-color: ${(props) => props.theme.pageBackground};
     width: 50%;
     font-size: 0.8rem;
     padding: 2px 0.5rem;
+    border: none;
+    border-bottom: 1px solid ${(props) => props.theme.fontColor};
+    color: ${(props) => props.theme.fontColor};
   }
 
   button {
     width: 50px;
     background-color: ${(props) => props.theme.pageBackground};
     font-size: ${(props) => props.theme.fontSize[1]};
+    color: ${(props) => props.theme.fontColor};
+    border: none;
   }
 `
 
 const ButtonContainer = styled.div`
   width: 100%;
-  border: 1px solid black;
+  padding: ${(props) => props.theme.spacing[1]} 0rem;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: ${(props) => props.theme.spacing[2]};
+  button {
+    width: 100px;
+    font-size: ${(props) => props.theme.fontSize[1]};
+    background-color: white;
+    letter-spacing: 3px;
+    border-radius: 10px;
+    border: 1px solid ${(props) => props.theme.fontColor};
+    cursor: pointer;
+    &:hover {
+      background-color: lightgrey;
+    }
+  }
 `
 
 export default LandingPage
