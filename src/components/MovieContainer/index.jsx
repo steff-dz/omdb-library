@@ -2,11 +2,25 @@ import React from 'react'
 import styled from 'styled-components'
 
 const MovieContainer = ({ movie, starred, clickHandler }) => {
+  function handleEnterKey(evt, movie) {
+    if (evt.key === 'Enter') {
+      clickHandler(movie)
+    } else {
+      console.log('poop')
+    }
+  }
+
   return (
     <ArticleBase>
-      <i onClick={() => clickHandler(movie)} className={starred ? 'fas fa-star' : 'far fa-star'}>
-        <input type="checkbox"></input>
-      </i>
+      <label htmlFor="movie select check-box">
+        <i
+          tabindex="0"
+          onKeyPress={(evt) => handleEnterKey(evt, movie)}
+          onClick={() => clickHandler(movie)}
+          className={starred ? 'fas fa-star' : 'far fa-star'}
+        ></i>
+      </label>
+
       <img src={movie.Poster} alt={`poster for ${movie.Title}`}></img>
     </ArticleBase>
   )
@@ -25,10 +39,6 @@ const ArticleBase = styled.article`
     right: 5px;
     top: 5px;
     color: yellow;
-
-    input {
-      display: none;
-    }
   }
 
   img {
@@ -42,3 +52,12 @@ const ArticleBase = styled.article`
 `
 
 export default MovieContainer
+
+/* <ArticleBase>
+<label>
+  <i onClick={() => clickHandler(movie)} className={starred ? 'fas fa-star' : 'far fa-star'}>
+    <input type="checkbox"></input>
+  </i>
+</label>
+<img src={movie.Poster} alt={`poster for ${movie.Title}`}></img>
+</ArticleBase> */
