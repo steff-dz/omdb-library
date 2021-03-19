@@ -5,6 +5,7 @@ import { MainBase } from '../../components/MainBase'
 import MovieContainer from '../../components/MovieContainer'
 
 const apiKey = process.env.OMDB_KEY
+
 const LandingPage = ({ watchList, clickHandler }) => {
   const [movies, setMovies] = useState([])
   const [query, setQuery] = useState('star wars')
@@ -40,7 +41,7 @@ const LandingPage = ({ watchList, clickHandler }) => {
   }
 
   return (
-    <MainBase>
+    <>
       <FormBase name="omdb-search" onSubmit={(e) => handleSubmit(e)}>
         <input
           onClick={() => setQuery('')}
@@ -52,35 +53,49 @@ const LandingPage = ({ watchList, clickHandler }) => {
           <i className="fas fa-search"></i>
         </button>
       </FormBase>
-      {movies &&
-        movies.map((el) => (
-          <MovieContainer
-            key={uuidv4()}
-            movie={el}
-            starred={Boolean(
-              watchList.find((item) => {
-                return item.imdbID === el.imdbID
-              })
-            )}
-            clickHandler={clickHandler}
-          />
-        ))}
-      <ButtonContainer>
-        <button onClick={() => setPageCounter(pageCounter - 1)}>Back</button>
-        <button onClick={() => setPageCounter(pageCounter + 1)}>Next 10</button>
-      </ButtonContainer>
-    </MainBase>
+      <MainBase>
+        {movies &&
+          movies.map((el) => (
+            <MovieContainer
+              key={uuidv4()}
+              movie={el}
+              starred={Boolean(
+                watchList.find((item) => {
+                  return item.imdbID === el.imdbID
+                })
+              )}
+              clickHandler={clickHandler}
+            />
+          ))}
+        <ButtonContainer>
+          <button onClick={() => setPageCounter(pageCounter - 1)}>Back</button>
+          <button onClick={() => setPageCounter(pageCounter + 1)}>Next 10</button>
+        </ButtonContainer>
+      </MainBase>
+    </>
   )
 }
 
 const FormBase = styled.form`
-  /* border: 1px solid purple; */
+  /* border: 1px solid lightgrey; */
   display: flex;
   justify-content: center;
-  margin-bottom: 0.5rem;
+  margin: ${(props) => props.theme.spacing[2]} 0rem;
+
+  /* margin-bottom: ${(props) => props.theme.spacing[2]}; */
   width: 100%;
+  padding-left: ${(props) => props.theme.spacing[2]};
   input {
     background-color: lightgrey;
+    width: 50%;
+    font-size: 0.8rem;
+    padding: 2px 0.5rem;
+  }
+
+  button {
+    width: 50px;
+    background-color: ${(props) => props.theme.pageBackground};
+    font-size: ${(props) => props.theme.fontSize[1]};
   }
 `
 

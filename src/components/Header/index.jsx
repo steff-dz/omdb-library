@@ -11,11 +11,10 @@ const Header = () => {
 
 const HeaderBase = styled.header`
   text-align: center;
-  background-color: ${(props) => props.theme.pageBackground};
   color: ${(props) => props.theme.fontColor};
   h1 {
-    font-size: 1.8rem;
-    padding: 1rem;
+    font-size: ${(props) => props.theme.fontSize[3]};
+    padding: ${(props) => props.theme.spacing[2]};
   }
 `
 

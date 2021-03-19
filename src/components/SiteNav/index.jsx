@@ -16,13 +16,15 @@ const SiteNav = () => {
 }
 
 const NavBase = styled.nav`
-  background-color: ${(props) => props.theme.pageBackground};
+  /* background-color: ${(props) => props.theme.pageBackground}; */
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: ${(props) => props.theme.spacing[4]};
 
   .nav-item {
     text-decoration: none;
     color: ${(props) => props.theme.fontColor};
+    font-size: ${(props) => props.theme.fontSize[1]};
   }
 `
 
