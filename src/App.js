@@ -23,12 +23,20 @@ function App() {
     }
   }
 
+  const themeHandler = () => {
+    if (theme === 'dark') {
+      setTheme('light')
+    } else {
+      setTheme('dark')
+    }
+  }
+
   return (
     <>
       <ThemeProvider theme={themes[theme]}>
         <Router>
           <GlobalStyle />
-          <Header />
+          <Header themeHandler={themeHandler} />
           <SiteNav />
           <Switch>
             <Route exact path="/">
