@@ -5,7 +5,7 @@ import { MainBase } from '../../components/MainBase'
 import MovieContainer from '../../components/MovieContainer'
 
 const apiKey = process.env.OMDB_KEY
-const LandingPage = ({ theme, watchList, setWatchList }) => {
+const LandingPage = ({ theme, watchList, clickHandler }) => {
   const [movies, setMovies] = useState([])
   const [query, setQuery] = useState('star wars')
   const [pageCounter, setPageCounter] = useState(1)
@@ -32,20 +32,10 @@ const LandingPage = ({ theme, watchList, setWatchList }) => {
   function handleSubmit(e) {
     e.preventDefault()
     getMovies()
-    //setQuery('')
   }
 
   function handleInput(e) {
     setQuery(e.target.value)
-  }
-
-  function handleClick(movie) {
-    let movieCheck = watchList.find((el) => el.imdbID === movie.imdbID)
-    if (movieCheck) {
-      setWatchList(watchList.filter((el) => el.imdbID !== movie.imdbID))
-    } else {
-      setWatchList([...watchList, movie])
-    }
   }
 
   return (
@@ -71,7 +61,7 @@ const LandingPage = ({ theme, watchList, setWatchList }) => {
                 return item.imdbID === el.imdbID
               })
             )}
-            clickHandler={() => handleClick(el)}
+            clickHandler={clickHandler}
           />
         ))}
       <ButtonContainer>
@@ -81,17 +71,6 @@ const LandingPage = ({ theme, watchList, setWatchList }) => {
     </MainBase>
   )
 }
-
-// const MainBase = styled.main`
-//   border: 1px solid lightblue;
-//   min-height: fit-content;
-//   width: 100%;
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: 0.5rem;
-//   justify-content: center;
-//   background-color: ${(props) => props.theme.pageBackground};
-// `
 
 const FormBase = styled.form`
   /* border: 1px solid purple; */

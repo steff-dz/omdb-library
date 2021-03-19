@@ -3,15 +3,15 @@ import styled from 'styled-components'
 import { MainBase } from '../../components/MainBase'
 import MovieContainer from '../../components/MovieContainer'
 
-const WatchListPage = ({ theme, watchList, setWatchList }) => {
-  function handleClick(movie) {
-    let movieCheck = watchList.find((el) => el.imdbID === movie.imdbID)
-    if (movieCheck) {
-      setWatchList(watchList.filter((el) => el.imdbID !== movie.imdbID))
-    } else {
-      setWatchList([...watchList, movie])
-    }
-  }
+const WatchListPage = ({ theme, watchList, clickHandler }) => {
+  // function handleClick(movie) {
+  //   let movieCheck = watchList.find((el) => el.imdbID === movie.imdbID)
+  //   if (movieCheck) {
+  //     setWatchList(watchList.filter((el) => el.imdbID !== movie.imdbID))
+  //   } else {
+  //     setWatchList([...watchList, movie])
+  //   }
+  // }
   return (
     <>
       <MainBase>
@@ -25,7 +25,7 @@ const WatchListPage = ({ theme, watchList, setWatchList }) => {
                   return item.imdbID === el.imdbID
                 })
               )}
-              clickHandler={() => handleClick(el)}
+              clickHandler={clickHandler}
             />
           ))}
       </MainBase>

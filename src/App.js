@@ -14,6 +14,15 @@ function App() {
   const [theme, setTheme] = useState('light')
   const [watchList, setWatchList] = useState([])
 
+  const clickHandler = (el) => {
+    let movieCheck = watchList.find((item) => item.imdbID === el.imdbID)
+    if (movieCheck) {
+      setWatchList(watchList.filter((item) => item.imdbID !== el.imdbID))
+    } else {
+      setWatchList([...watchList, el])
+    }
+  }
+
   return (
     <>
       <ThemeProvider theme={themes[theme]}>
@@ -23,10 +32,10 @@ function App() {
           <SiteNav />
           <Switch>
             <Route exact path="/">
-              <LandingPage theme={theme} watchList={watchList} setWatchList={setWatchList} />
+              <LandingPage theme={theme} watchList={watchList} clickHandler={clickHandler} />
             </Route>
             <Route exact path="/mywatchlist">
-              <WatchListPage theme={theme} watchList={watchList} setWatchList={setWatchList} />
+              <WatchListPage theme={theme} watchList={watchList} clickHandler={clickHandler} />
             </Route>
           </Switch>
         </Router>
