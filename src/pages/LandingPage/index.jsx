@@ -5,7 +5,7 @@ import { MainBase } from '../../components/MainBase'
 import MovieContainer from '../../components/MovieContainer'
 
 const apiKey = process.env.OMDB_KEY
-const LandingPage = ({ theme, watchList, clickHandler }) => {
+const LandingPage = ({ watchList, clickHandler }) => {
   const [movies, setMovies] = useState([])
   const [query, setQuery] = useState('star wars')
   const [pageCounter, setPageCounter] = useState(1)
@@ -31,6 +31,7 @@ const LandingPage = ({ theme, watchList, clickHandler }) => {
 
   function handleSubmit(e) {
     e.preventDefault()
+    setPageCounter(1)
     getMovies()
   }
 

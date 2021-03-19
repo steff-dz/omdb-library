@@ -32,10 +32,10 @@ function App() {
           <SiteNav />
           <Switch>
             <Route exact path="/">
-              <LandingPage theme={theme} watchList={watchList} clickHandler={clickHandler} />
+              <LandingPage watchList={watchList} clickHandler={clickHandler} />
             </Route>
             <Route exact path="/mywatchlist">
-              <WatchListPage theme={theme} watchList={watchList} clickHandler={clickHandler} />
+              <WatchListPage watchList={watchList} clickHandler={clickHandler} />
             </Route>
           </Switch>
         </Router>

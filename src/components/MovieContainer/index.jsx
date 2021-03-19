@@ -4,11 +4,10 @@ import styled from 'styled-components'
 const MovieContainer = ({ movie, starred, clickHandler }) => {
   return (
     <ArticleBase>
-      <i
-        onClick={() => clickHandler(movie)}
-        className={starred ? 'fas fa-star' : 'far fa-star'}
-      ></i>
-      <img src={movie.Poster}></img>
+      <i onClick={() => clickHandler(movie)} className={starred ? 'fas fa-star' : 'far fa-star'}>
+        <input type="checkbox"></input>
+      </i>
+      <img src={movie.Poster} alt={`poster for ${movie.Title}`}></img>
     </ArticleBase>
   )
 }
@@ -26,6 +25,10 @@ const ArticleBase = styled.article`
     right: 5px;
     top: 5px;
     color: yellow;
+
+    input {
+      display: none;
+    }
   }
 
   img {

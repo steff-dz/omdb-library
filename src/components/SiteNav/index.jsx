@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-const SiteNav = ({ props }) => {
+const SiteNav = () => {
   return (
     <NavBase>
       <NavLink className="nav-item" to="/">

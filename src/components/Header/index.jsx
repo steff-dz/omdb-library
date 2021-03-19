@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Header = (props) => {
+const Header = () => {
   return (
     <HeaderBase>
       <h1>OMDB Library</h1>
