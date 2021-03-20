@@ -32,13 +32,9 @@ function App() {
     }
   }
 
-  const typeHandler = (evt) => {
-    setType(evt.target.value)
+  const typeHandler = (category) => {
+    setType(category)
   }
-
-  // const typeHandler = (data) => {
-  //   setType(data)
-  // }
 
   return (
     <>

@@ -5,16 +5,12 @@ import styled from 'styled-components'
 const SiteNav = ({ typeHandler }) => {
   return (
     <NavBase>
-      <NavLink className="nav-item" to="/">
-        {/* Movies */}
-        <select onChange={(evt) => typeHandler(evt)} name="media-type">
-          <option value="movie">Movies</option>
-          <option value="series">Series</option>
-        </select>
+      <NavLink className="nav-item" to="/" onClick={() => typeHandler('movie')}>
+        Movies
       </NavLink>
-      {/* <NavLink className="nav-item" to="/" onClick={() => typeHandler('series')}>
+      <NavLink className="nav-item" to="/" onClick={() => typeHandler('series')}>
         Series
-      </NavLink> */}
+      </NavLink>
       <NavLink className="nav-item" to="/mywatchlist">
         My List
       </NavLink>
