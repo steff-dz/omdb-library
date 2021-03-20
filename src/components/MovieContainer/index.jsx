@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const MovieContainer = ({ movie, starred, clickHandler }) => {
+  //function to select a show w/ enter key--------------------------
   function handleEnterKey(evt, movie) {
     if (evt.key === 'Enter') {
       clickHandler(movie)
@@ -14,6 +15,7 @@ const MovieContainer = ({ movie, starred, clickHandler }) => {
     <ArticleBase>
       <label htmlFor="movie select check-box">
         <i
+          id="movie select check-box"
           tabIndex="0"
           onKeyPress={(evt) => handleEnterKey(evt, movie)}
           onClick={() => clickHandler(movie)}

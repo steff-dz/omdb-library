@@ -7,14 +7,17 @@ import MovieContainer from '../../components/MovieContainer'
 const apiKey = process.env.OMDB_KEY
 
 const LandingPage = ({ type, watchList, clickHandler }) => {
+  //required states for storing and searching for shows--------------------------------------------
   const [movies, setMovies] = useState([])
   const [query, setQuery] = useState('star wars')
   const [pageCounter, setPageCounter] = useState(1)
 
+  //use Effect to invoke getMovies func, and whenever pageCounter and type change------------------
   useEffect(() => {
     getMovies()
   }, [pageCounter, type])
 
+  //function to get movies from the OMDB API store them into the movies state-----------------------
   function getMovies() {
     setMovies('')
     fetch(`http://www.omdbapi.com/?s=${query}&type=${type}&page=${pageCounter}&apikey=${apiKey}`)
@@ -29,12 +32,14 @@ const LandingPage = ({ type, watchList, clickHandler }) => {
       })
   }
 
+  //function to update the page counter state and run the getMovies func with changed states---------
   function handleSubmit(e) {
     e.preventDefault()
     setPageCounter(1)
     getMovies()
   }
 
+  //storing the query into a state and waiting to run until submit is clicked-------------------------
   function handleInput(e) {
     setQuery(e.target.value)
   }
@@ -43,12 +48,13 @@ const LandingPage = ({ type, watchList, clickHandler }) => {
     <>
       <FormBase name="omdb-search" onSubmit={(e) => handleSubmit(e)}>
         <input
+          id="omdb-search"
           onClick={() => setQuery('')}
           onChange={(e) => handleInput(e)}
           value={query}
           type="text"
         ></input>
-        <button type="submit">
+        <button aria-label="submit form" type="submit">
           <i className="fas fa-search"></i>
         </button>
       </FormBase>
@@ -67,8 +73,12 @@ const LandingPage = ({ type, watchList, clickHandler }) => {
             />
           ))}
         <ButtonContainer>
-          <button onClick={() => setPageCounter(pageCounter - 1)}>Back</button>
-          <button onClick={() => setPageCounter(pageCounter + 1)}>Next</button>
+          <button aria-label="back 10 items" onClick={() => setPageCounter(pageCounter - 1)}>
+            Back
+          </button>
+          <button aria-label="fowards 10 items" onClick={() => setPageCounter(pageCounter + 1)}>
+            Next
+          </button>
         </ButtonContainer>
       </MainBase>
     </>
@@ -111,14 +121,11 @@ const FormBase = styled.form`
 
 const ButtonContainer = styled.div`
   width: 100%;
-  /* padding: ${(props) => props.theme.spacing[1]} 0rem; */
+
   height: fit-content;
   display: flex;
   justify-content: center;
   gap: ${(props) => props.theme.spacing[2]};
-  @media only screen and (min-width: 768px) {
-    /* padding-bottom: ${(props) => props.theme.spacing[4]}; */
-  }
 
   button {
     width: 100px;

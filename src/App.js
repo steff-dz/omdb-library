@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useLocalStorage } from './utils/useLocalStorage'
 import { ThemeProvider } from 'styled-components'
@@ -11,10 +10,12 @@ import LandingPage from './pages/LandingPage'
 import WatchListPage from './pages/WatchListPage'
 
 function App() {
+  //The states that need to be accessible in other areas of the--------
   const [theme, setTheme] = useState('light')
   const [watchList, setWatchList] = useLocalStorage('watchlist', [])
   const [type, setType] = useState('movie')
 
+  //function for selection a show--------------------------------------
   const clickHandler = (el) => {
     let movieCheck = watchList.find((item) => item.imdbID === el.imdbID)
     if (movieCheck) {
@@ -24,6 +25,7 @@ function App() {
     }
   }
 
+  //function for toggling between themes------------------------------
   const themeHandler = () => {
     if (theme === 'dark') {
       setTheme('light')
@@ -32,6 +34,7 @@ function App() {
     }
   }
 
+  //function for changing media type----------------------------------
   const typeHandler = (category) => {
     setType(category)
   }

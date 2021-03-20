@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import { MainBase } from '../../components/MainBase'
 import MovieContainer from '../../components/MovieContainer'
 

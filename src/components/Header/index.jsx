@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Header = ({ themeHandler }) => {
+  //function to toggle theme w/ enter key----------------
   function handleEnterKey(evt) {
     if (evt.key === 'Enter') {
       themeHandler()
@@ -12,7 +13,7 @@ const Header = ({ themeHandler }) => {
   return (
     <HeaderBase>
       <label htmlFor="toggle display" tabIndex="0" onKeyPress={(evt) => handleEnterKey(evt)}>
-        <input type="checkbox" onClick={() => themeHandler()} />
+        <input id="toggle display" type="checkbox" onClick={() => themeHandler()} />
       </label>
       <h1>OMDB Library</h1>
     </HeaderBase>
@@ -107,6 +108,3 @@ const HeaderBase = styled.header`
 `
 
 export default Header
-/* transform: scale(1.1); */
-/* width: 20px;
-      height: 20px; */
