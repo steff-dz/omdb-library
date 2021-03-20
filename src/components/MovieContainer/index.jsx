@@ -46,6 +46,16 @@ const ArticleBase = styled.article`
     width: 100%;
     color: black;
   }
+
+  @media only screen and (min-width: 768px) {
+    height: 410px;
+    width: 270px;
+
+    .fa-star {
+      font-size: ${(props) => props.theme.fontSize[3]};
+      top: 10px;
+    }
+  }
 `
 
 export default MovieContainer

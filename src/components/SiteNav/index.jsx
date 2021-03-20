@@ -28,6 +28,10 @@ const NavBase = styled.nav`
     text-decoration: none;
     color: ${(props) => props.theme.fontColor};
     font-size: ${(props) => props.theme.fontSize[1]};
+
+    @media only screen and (min-width: 768px) {
+      font-size: ${(props) => props.theme.fontSize[2]};
+    }
   }
 
   select {

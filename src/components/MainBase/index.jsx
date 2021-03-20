@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 
 export const MainBase = styled.main`
-  /* border: 1px solid lightblue; */
-
   min-height: fit-content;
   height: 80vh;
   width: 100%;

@@ -90,6 +90,10 @@ const FormBase = styled.form`
     border: none;
     border-bottom: 1px solid ${(props) => props.theme.fontColor};
     color: ${(props) => props.theme.fontColor};
+
+    @media only screen and (min-width: 768px) {
+      font-size: 1.2rem;
+    }
   }
 
   button {
@@ -98,26 +102,40 @@ const FormBase = styled.form`
     font-size: ${(props) => props.theme.fontSize[1]};
     color: ${(props) => props.theme.fontColor};
     border: none;
+
+    @media only screen and (min-width: 768px) {
+      font-size: 1.3rem;
+    }
   }
 `
 
 const ButtonContainer = styled.div`
   width: 100%;
-  padding: ${(props) => props.theme.spacing[1]} 0rem;
+  /* padding: ${(props) => props.theme.spacing[1]} 0rem; */
+  height: fit-content;
   display: flex;
   justify-content: center;
-  align-items: center;
   gap: ${(props) => props.theme.spacing[2]};
+  @media only screen and (min-width: 768px) {
+    /* padding-bottom: ${(props) => props.theme.spacing[4]}; */
+  }
+
   button {
     width: 100px;
     font-size: ${(props) => props.theme.fontSize[1]};
     background-color: white;
     letter-spacing: 3px;
     border-radius: 10px;
-    border: 1px solid ${(props) => props.theme.fontColor};
+    border: 2px solid ${(props) => props.theme.fontColor};
+    text-align: center;
     cursor: pointer;
     &:hover {
       background-color: lightgrey;
+    }
+
+    @media only screen and (min-width: 768px) {
+      font-size: ${(props) => props.theme.fontSize[2]};
+      letter-spacing: 0;
     }
   }
 `

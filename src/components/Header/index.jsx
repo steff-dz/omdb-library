@@ -37,6 +37,9 @@ const HeaderBase = styled.header`
     /* transform: translate(40px, 40px); */
     align-self: flex-start;
     padding-left: 50px;
+    @media only screen and (min-width: 768px) {
+      padding-left: 20vw;
+    }
 
     input[type='checkbox'] {
       position: relative;
@@ -51,39 +54,59 @@ const HeaderBase = styled.header`
       box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
       transition: 0.5s;
       outline: none;
+
+      @media only screen and (min-width: 768px) {
+        height: 30px;
+        width: 80px;
+      }
     }
 
+    //this is the switch bar, it turns white when checked
     input:checked[type='checkbox'] {
       background-color: white;
     }
 
+    //this is the little circle that toggles
     input[type='checkbox']::before {
       content: '';
       position: absolute;
-      /* width: 20px;
-      height: 20px; */
       width: 15px;
       height: 15px;
       border-radius: 20px;
       top: 3px;
       left: 5px;
-      /* background-color: ${(props) => props.theme.fontColor}; */
       background-color: white;
-      /* transform: scale(1.1); */
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
       transition: 0.5s;
+
+      @media only screen and (min-width: 768px) {
+        width: 25px;
+        height: 25px;
+        top: 2px;
+      }
     }
 
     input:checked[type='checkbox']::before {
       left: 40px;
       background-color: #333;
+
+      @media only screen and (min-width: 768px) {
+        left: 50px;
+      }
     }
   }
 
   h1 {
     font-size: ${(props) => props.theme.fontSize[3]};
     padding: ${(props) => props.theme.spacing[2]};
+
+    @media only screen and (min-width: 768px) {
+      font-size: 3rem;
+    }
   }
 `
 
 export default Header
+/* transform: scale(1.1); */
+/* width: 20px;
+      height: 20px; */
