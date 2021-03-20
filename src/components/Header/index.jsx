@@ -2,10 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Header = ({ themeHandler }) => {
-  // console.log(themeHandler)
+  function handleEnterKey(evt) {
+    if (evt.key === 'Enter') {
+      themeHandler()
+    } else {
+      console.log('poop')
+    }
+  }
   return (
     <HeaderBase>
-      <label htmlFor="toggle display">
+      <label htmlFor="toggle display" tabIndex="0" onKeyPress={(evt) => handleEnterKey(evt)}>
         <input type="checkbox" onClick={() => themeHandler()} />
       </label>
       <h1>OMDB Library</h1>

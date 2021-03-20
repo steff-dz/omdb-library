@@ -12,7 +12,6 @@ import WatchListPage from './pages/WatchListPage'
 
 function App() {
   const [theme, setTheme] = useState('light')
-  //const [watchList, setWatchList] = useState([])
   const [watchList, setWatchList] = useLocalStorage('watchlist', [])
   const [type, setType] = useState('movie')
 
@@ -36,6 +35,10 @@ function App() {
   const typeHandler = (evt) => {
     setType(evt.target.value)
   }
+
+  // const typeHandler = (data) => {
+  //   setType(data)
+  // }
 
   return (
     <>

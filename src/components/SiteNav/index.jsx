@@ -6,13 +6,17 @@ const SiteNav = ({ typeHandler }) => {
   return (
     <NavBase>
       <NavLink className="nav-item" to="/">
+        {/* Movies */}
         <select onChange={(evt) => typeHandler(evt)} name="media-type">
           <option value="movie">Movies</option>
           <option value="series">Series</option>
         </select>
       </NavLink>
+      {/* <NavLink className="nav-item" to="/" onClick={() => typeHandler('series')}>
+        Series
+      </NavLink> */}
       <NavLink className="nav-item" to="/mywatchlist">
-        My Watch List
+        My List
       </NavLink>
     </NavBase>
   )
@@ -21,7 +25,7 @@ const SiteNav = ({ typeHandler }) => {
 const NavBase = styled.nav`
   display: flex;
   justify-content: center;
-  gap: ${(props) => props.theme.spacing[4]};
+  gap: ${(props) => props.theme.spacing[3]};
 
   .nav-item,
   select {

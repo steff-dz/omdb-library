@@ -2,10 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 const MovieContainer = ({ movie, starred, clickHandler }) => {
-  // if (movie.Poster === 'N/A') {
-  //   console.log('its N/A')
-  // }
-
   function handleEnterKey(evt, movie) {
     if (evt.key === 'Enter') {
       clickHandler(movie)
