@@ -2,6 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 const MovieContainer = ({ movie, starred, clickHandler }) => {
+  // if (movie.Poster === 'N/A') {
+  //   console.log('its N/A')
+  // }
+
   function handleEnterKey(evt, movie) {
     if (evt.key === 'Enter') {
       clickHandler(movie)
@@ -32,6 +36,7 @@ const ArticleBase = styled.article`
   width: 150px;
   overflow: hidden;
   position: relative;
+  background-color: lightgrey;
 
   .fa-star {
     position: absolute;
@@ -43,6 +48,7 @@ const ArticleBase = styled.article`
   img {
     height: 100%;
     width: 100%;
+    color: black;
   }
 `
 

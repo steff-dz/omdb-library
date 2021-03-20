@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
+import { useLocalStorage } from './utils/useLocalStorage'
 import { ThemeProvider } from 'styled-components'
 import { themes } from './utils/theme'
 import GlobalStyle from './components/GlobalStyle'
@@ -12,7 +12,8 @@ import WatchListPage from './pages/WatchListPage'
 
 function App() {
   const [theme, setTheme] = useState('light')
-  const [watchList, setWatchList] = useState([])
+  //const [watchList, setWatchList] = useState([])
+  const [watchList, setWatchList] = useLocalStorage('watchlist', [])
   const [type, setType] = useState('movie')
 
   const clickHandler = (el) => {
