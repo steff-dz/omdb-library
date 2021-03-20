@@ -2,12 +2,12 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-const SiteNav = () => {
+const SiteNav = ({ typeHandler }) => {
   return (
     <NavBase>
       <NavLink className="nav-item" to="/">
-        <select name="media-type">
-          <option value="movies">Movies</option>
+        <select onChange={(evt) => typeHandler(evt)} name="media-type">
+          <option value="movie">Movies</option>
           <option value="series">Series</option>
         </select>
       </NavLink>
@@ -19,7 +19,6 @@ const SiteNav = () => {
 }
 
 const NavBase = styled.nav`
-  /* background-color: ${(props) => props.theme.pageBackground}; */
   display: flex;
   justify-content: center;
   gap: ${(props) => props.theme.spacing[4]};
@@ -33,7 +32,8 @@ const NavBase = styled.nav`
 
   select {
     border: none;
-    background-color: transparent;
+    background-color: ${(props) => props.theme.pageBackground};
+    color: ${(props) => props.theme.fontColor};
   }
 `
 

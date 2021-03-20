@@ -13,6 +13,7 @@ import WatchListPage from './pages/WatchListPage'
 function App() {
   const [theme, setTheme] = useState('light')
   const [watchList, setWatchList] = useState([])
+  const [type, setType] = useState('movie')
 
   const clickHandler = (el) => {
     let movieCheck = watchList.find((item) => item.imdbID === el.imdbID)
@@ -31,16 +32,20 @@ function App() {
     }
   }
 
+  const typeHandler = (evt) => {
+    setType(evt.target.value)
+  }
+
   return (
     <>
       <ThemeProvider theme={themes[theme]}>
         <Router>
           <GlobalStyle />
           <Header themeHandler={themeHandler} />
-          <SiteNav />
+          <SiteNav typeHandler={typeHandler} />
           <Switch>
             <Route exact path="/">
-              <LandingPage watchList={watchList} clickHandler={clickHandler} />
+              <LandingPage type={type} watchList={watchList} clickHandler={clickHandler} />
             </Route>
             <Route exact path="/mywatchlist">
               <WatchListPage watchList={watchList} clickHandler={clickHandler} />

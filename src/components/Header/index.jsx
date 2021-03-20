@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const Header = ({ themeHandler }) => {
-  console.log(themeHandler)
+  // console.log(themeHandler)
   return (
     <HeaderBase>
       <label htmlFor="toggle display">

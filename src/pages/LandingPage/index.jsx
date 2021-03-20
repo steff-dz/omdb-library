@@ -6,11 +6,10 @@ import MovieContainer from '../../components/MovieContainer'
 
 const apiKey = process.env.OMDB_KEY
 
-const LandingPage = ({ watchList, clickHandler }) => {
+const LandingPage = ({ type, watchList, clickHandler }) => {
   const [movies, setMovies] = useState([])
   const [query, setQuery] = useState('star wars')
   const [pageCounter, setPageCounter] = useState(1)
-  const [type, setType] = useState('movie')
 
   useEffect(() => {
     getMovies()
