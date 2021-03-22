@@ -5,13 +5,13 @@ import styled from 'styled-components'
 const SiteNav = ({ typeHandler }) => {
   return (
     <NavBase>
-      <NavLink className="nav-item" to="/" onClick={() => typeHandler('movie')}>
+      <NavLink className="nav-item" exact to="/" onClick={() => typeHandler('movie')}>
         Movies
       </NavLink>
-      <NavLink className="nav-item" to="/" onClick={() => typeHandler('series')}>
+      <NavLink className="nav-item" exact to="/" onClick={() => typeHandler('series')}>
         Series
       </NavLink>
-      <NavLink className="nav-item" to="/mywatchlist">
+      <NavLink className="nav-item" exact to="/mywatchlist">
         My List
       </NavLink>
     </NavBase>

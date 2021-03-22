@@ -1,13 +1,13 @@
 const lightTheme = {
-  pageBackground: 'white',
-  fontColor: '#111',
+  pageBackground: '#fffffe',
+  fontColor: '#272343',
   spacing: [0, '0.25rem', '0.5rem', '1rem', '2rem', '4rem'],
   fontSize: ['0.5rem', '1rem', '1.5rem', '2rem'],
 }
 
 const darkTheme = {
   pageBackground: '#111',
-  fontColor: 'white',
+  fontColor: '#fffffe',
   spacing: [0, '0.25rem', '0.5rem', '1rem', '2rem', '4rem'],
   fontSize: ['0.5rem', '1rem', '1.5rem', '2rem'],
 }

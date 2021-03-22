@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
 import { MainBase } from '../../components/MainBase'
+import PageTitle from '../../components/PageTitle'
 import MovieContainer from '../../components/MovieContainer'
 
 const apiKey = process.env.OMDB_KEY
@@ -58,6 +59,7 @@ const LandingPage = ({ type, watchList, clickHandler }) => {
           <i className="fas fa-search"></i>
         </button>
       </FormBase>
+      <PageTitle title={type} spanWidth={'50%'} />
       <MainBase>
         {movies &&
           movies.map((el) => (
@@ -94,9 +96,9 @@ const FormBase = styled.form`
   input {
     /* background-color: rgba(242, 242, 242, 0.178); */
     background-color: ${(props) => props.theme.pageBackground};
-    width: 50%;
+    width: 30%;
     font-size: 0.8rem;
-    padding: 2px 0.5rem;
+    padding: 0.5rem;
     border: none;
     border-bottom: 1px solid ${(props) => props.theme.fontColor};
     color: ${(props) => props.theme.fontColor};
@@ -108,10 +110,11 @@ const FormBase = styled.form`
 
   button {
     width: 50px;
+    border: none;
     background-color: ${(props) => props.theme.pageBackground};
     font-size: ${(props) => props.theme.fontSize[1]};
     color: ${(props) => props.theme.fontColor};
-    border: none;
+    margin-left: 0.2rem;
 
     @media only screen and (min-width: 768px) {
       font-size: 1.3rem;
