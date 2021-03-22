@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { useLocalStorage } from './utils/useLocalStorage'
 import { ThemeProvider } from 'styled-components'
@@ -9,6 +9,7 @@ import SiteNav from './components/SiteNav'
 import LandingPage from './pages/LandingPage'
 import SeriesPage from './pages/SeriesPage'
 import WatchListPage from './pages/WatchListPage'
+const apiKey = process.env.OMDB_KEY
 
 function App() {
   //The states that need to be used in other areas of the app--------
@@ -16,6 +17,13 @@ function App() {
   const [query, setQuery] = useState('star wars')
   const [watchList, setWatchList] = useLocalStorage('watchlist', [])
   const [type, setType] = useState('movie')
+  const [media, setMedia] = useState([])
+  const [pageCounter, setPageCounter] = useState(1)
+
+  useEffect(() => {
+    console.log(type)
+    getMedia()
+  }, [type, pageCounter])
 
   //function for selection a show--------------------------------------
   const clickHandler = (el) => {
@@ -38,7 +46,27 @@ function App() {
 
   //function for changing media type----------------------------------
   const typeHandler = (category) => {
+    console.log(category)
     setType(category)
+  }
+
+  function getMedia() {
+    fetch(`http://www.omdbapi.com/?s=${query}&type=${type}&page=${pageCounter}&apikey=${apiKey}`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        //setSeries(data.Search)
+        setMedia(data.Search)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const handleInput = (e) => {
+    //console.log(e.target.value)
+    setQuery(e.target.value)
   }
 
   return (
@@ -50,14 +78,27 @@ function App() {
           <SiteNav typeHandler={typeHandler} />
           <Switch>
             <Route exact path="/">
-              <LandingPage type={type} watchList={watchList} clickHandler={clickHandler} />
+              <LandingPage
+                query={query}
+                media={media}
+                handleInput={handleInput}
+                watchList={watchList}
+                clickHandler={clickHandler}
+                getMedia={() => getMedia()}
+                pageCounter={pageCounter}
+                setPageCounter={setPageCounter}
+              />
             </Route>
             <Route exact path="/series">
               <SeriesPage
-                type={type}
                 query={query}
+                media={media}
+                handleInput={handleInput}
                 watchList={watchList}
                 clickHandler={clickHandler}
+                getMedia={() => getMedia()}
+                pageCounter={pageCounter}
+                setPageCounter={setPageCounter}
               />
             </Route>
             <Route exact path="/mywatchlist">

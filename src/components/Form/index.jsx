@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-const Form = () => {
+const Form = ({ query, handleInput, getMedia }) => {
+  function handleSubmit(e) {
+    e.preventDefault()
+    console.log(query)
+    getMedia()
+  }
+
   return (
-    <FormBase name="omdb-search">
-      <input id="omdb-search" type="text"></input>
+    <FormBase name="omdb-search" onSubmit={(e) => handleSubmit(e)}>
+      <input id="omdb-search" type="text" value={query} onChange={(e) => handleInput(e)}></input>
       <button aria-label="submit form" type="submit">
         <i className="fas fa-search"></i>
       </button>
