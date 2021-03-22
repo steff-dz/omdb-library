@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
 import { MainBase } from '../../components/MainBase'
 import PageTitle from '../../components/PageTitle'
+import PageSkeleton from '../../components/PageSkeleton'
 import MovieContainer from '../../components/MovieContainer'
 
 const apiKey = process.env.OMDB_KEY
@@ -45,6 +46,21 @@ const LandingPage = ({ type, watchList, clickHandler }) => {
     setQuery(e.target.value)
   }
 
+  function renderMovies() {
+    return movies.map((el) => (
+      <MovieContainer
+        key={uuidv4()}
+        movie={el}
+        starred={Boolean(
+          watchList.find((item) => {
+            return item.imdbID === el.imdbID
+          })
+        )}
+        clickHandler={clickHandler}
+      ></MovieContainer>
+    ))
+  }
+
   return (
     <>
       <FormBase name="omdb-search" onSubmit={(e) => handleSubmit(e)}>
@@ -61,19 +77,8 @@ const LandingPage = ({ type, watchList, clickHandler }) => {
       </FormBase>
       <PageTitle title={type} spanWidth={'50%'} />
       <MainBase>
-        {movies &&
-          movies.map((el) => (
-            <MovieContainer
-              key={uuidv4()}
-              movie={el}
-              starred={Boolean(
-                watchList.find((item) => {
-                  return item.imdbID === el.imdbID
-                })
-              )}
-              clickHandler={clickHandler}
-            />
-          ))}
+        {movies ? renderMovies() : <PageSkeleton />}
+
         <ButtonContainer>
           <button aria-label="back 10 items" onClick={() => setPageCounter(pageCounter - 1)}>
             Back
@@ -151,3 +156,17 @@ const ButtonContainer = styled.div`
 `
 
 export default LandingPage
+
+// {movies &&
+//   movies.map((el) => (
+//     <MovieContainer
+//       key={uuidv4()}
+//       movie={el}
+//       starred={Boolean(
+//         watchList.find((item) => {
+//           return item.imdbID === el.imdbID
+//         })
+//       )}
+//       clickHandler={clickHandler}
+//     />
+//   ))}
