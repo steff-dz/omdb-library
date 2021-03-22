@@ -1,11 +1,18 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-const Form = ({ query, handleInput, getMedia }) => {
+const Form = ({ getMedia, setPageCounter }) => {
+  const [query, setQuery] = useState('star wars')
+  //const [inputTxt, setInputTxt] = useState(query)
+  //console.log(inputTxt)
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(query)
-    getMedia()
+    setPageCounter(1)
+    getMedia(query)
+  }
+
+  const handleInput = (e) => {
+    setQuery(e.target.value)
   }
 
   return (

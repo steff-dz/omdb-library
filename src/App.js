@@ -14,14 +14,14 @@ const apiKey = process.env.OMDB_KEY
 function App() {
   //The states that need to be used in other areas of the app--------
   const [theme, setTheme] = useState('light')
-  const [query, setQuery] = useState('star wars')
+  //const [query, setQuery] = useState('star wars')
   const [watchList, setWatchList] = useLocalStorage('watchlist', [])
   const [type, setType] = useState('movie')
   const [media, setMedia] = useState([])
   const [pageCounter, setPageCounter] = useState(1)
 
   useEffect(() => {
-    console.log(type)
+    console.log('rendering from app')
     getMedia()
   }, [type, pageCounter])
 
@@ -46,27 +46,21 @@ function App() {
 
   //function for changing media type----------------------------------
   const typeHandler = (category) => {
-    console.log(category)
     setType(category)
   }
 
-  function getMedia() {
+  function getMedia(query) {
+    console.log(query)
     fetch(`http://www.omdbapi.com/?s=${query}&type=${type}&page=${pageCounter}&apikey=${apiKey}`)
       .then((response) => {
         return response.json()
       })
       .then((data) => {
-        //setSeries(data.Search)
         setMedia(data.Search)
       })
       .catch((err) => {
         console.log(err)
       })
-  }
-
-  const handleInput = (e) => {
-    //console.log(e.target.value)
-    setQuery(e.target.value)
   }
 
   return (
@@ -75,13 +69,11 @@ function App() {
         <Router>
           <GlobalStyle />
           <Header themeHandler={themeHandler} />
-          <SiteNav typeHandler={typeHandler} />
+          <SiteNav typeHandler={typeHandler} setPageCounter={setPageCounter} />
           <Switch>
             <Route exact path="/">
               <LandingPage
-                query={query}
                 media={media}
-                handleInput={handleInput}
                 watchList={watchList}
                 clickHandler={clickHandler}
                 getMedia={() => getMedia()}
@@ -91,9 +83,7 @@ function App() {
             </Route>
             <Route exact path="/series">
               <SeriesPage
-                query={query}
                 media={media}
-                handleInput={handleInput}
                 watchList={watchList}
                 clickHandler={clickHandler}
                 getMedia={() => getMedia()}

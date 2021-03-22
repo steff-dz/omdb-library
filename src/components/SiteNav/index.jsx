@@ -2,16 +2,33 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
-const SiteNav = ({ typeHandler }) => {
+const SiteNav = ({ typeHandler, setPageCounter }) => {
+  function handlePageChange(category) {
+    setPageCounter(1)
+    typeHandler(category)
+  }
+
   return (
     <NavBase>
-      <NavLink className="nav-item" to="/" onClick={() => typeHandler('movie')}>
+      <NavLink
+        activeStyle={{ color: 'blue' }}
+        className="nav-item"
+        exact
+        to="/"
+        onClick={() => handlePageChange('movie')}
+      >
         Movies
       </NavLink>
-      <NavLink className="nav-item" to="/series" onClick={() => typeHandler('series')}>
+      <NavLink
+        activeStyle={{ color: 'blue' }}
+        className="nav-item"
+        exact
+        to="/series"
+        onClick={() => handlePageChange('series')}
+      >
         Series
       </NavLink>
-      <NavLink className="nav-item" to="/mywatchlist">
+      <NavLink activeStyle={{ color: 'blue' }} className="nav-item" exact to="/mywatchlist">
         My List
       </NavLink>
     </NavBase>

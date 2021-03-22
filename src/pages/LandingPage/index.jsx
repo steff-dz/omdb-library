@@ -4,8 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { MainBase } from '../../components/MainBase'
 import Form from '../../components/Form'
 import MovieContainer from '../../components/MovieContainer'
-
-//const apiKey = process.env.OMDB_KEY
+import { ButtonContainer } from '../../components/ButtonContainer'
 
 const LandingPage = ({
   query,
@@ -17,46 +16,10 @@ const LandingPage = ({
   pageCounter,
   setPageCounter,
 }) => {
-  //required states for storing and searching for shows--------------------------------------------
-  // const [movies, setMovies] = useState([])
-  // const [query, setQuery] = useState('star wars')
-  // const [pageCounter, setPageCounter] = useState(1)
-
-  //use Effect to invoke getMovies func, and whenever pageCounter and type change------------------
-  // useEffect(() => {
-  //   getMedia()
-  // }, [])
-
-  //function to get movies from the OMDB API store them into the movies state-----------------------
-  // function getMovies() {
-  //   setMovies('')
-  //   fetch(`http://www.omdbapi.com/?s=${query}&type=movie&page=${pageCounter}&apikey=${apiKey}`)
-  //     .then((response) => {
-  //       return response.json()
-  //     })
-  //     .then((data) => {
-  //       setMovies(data.Search)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //     })
-  // }
-
-  //function to update the page counter state and run the getMovies func with changed states---------
-  // function handleSubmit(e) {
-  //   e.preventDefault()
-  //   setPageCounter(1)
-  //   getMovies()
-  // }
-
-  //storing the query into a state and waiting to run until submit is clicked-------------------------
-  // function handleInput(e) {
-  //   setQuery(e.target.value)
-  // }
-
   return (
     <MainBase>
-      <Form query={query} handleInput={handleInput} getMedia={getMedia} />
+      <Form getMedia={getMedia} setPageCounter={setPageCounter} />
+
       {media &&
         media.map((el) => (
           <MovieContainer
@@ -81,67 +44,5 @@ const LandingPage = ({
     </MainBase>
   )
 }
-
-// const FormBase = styled.form`
-//   display: flex;
-//   justify-content: center;
-//   margin: ${(props) => props.theme.spacing[2]} 0rem;
-//   width: 100%;
-//   padding-left: ${(props) => props.theme.spacing[2]};
-//   input {
-//     /* background-color: rgba(242, 242, 242, 0.178); */
-//     background-color: ${(props) => props.theme.pageBackground};
-//     width: 50%;
-//     font-size: 0.8rem;
-//     padding: 2px 0.5rem;
-//     border: none;
-//     border-bottom: 1px solid ${(props) => props.theme.fontColor};
-//     color: ${(props) => props.theme.fontColor};
-
-//     @media only screen and (min-width: 768px) {
-//       font-size: 1.2rem;
-//     }
-//   }
-
-//   button {
-//     width: 50px;
-//     background-color: ${(props) => props.theme.pageBackground};
-//     font-size: ${(props) => props.theme.fontSize[1]};
-//     color: ${(props) => props.theme.fontColor};
-//     border: none;
-
-//     @media only screen and (min-width: 768px) {
-//       font-size: 1.3rem;
-//     }
-//   }
-// `
-
-const ButtonContainer = styled.div`
-  width: 100%;
-
-  height: fit-content;
-  display: flex;
-  justify-content: center;
-  gap: ${(props) => props.theme.spacing[2]};
-
-  button {
-    width: 100px;
-    font-size: ${(props) => props.theme.fontSize[1]};
-    background-color: white;
-    letter-spacing: 3px;
-    border-radius: 10px;
-    border: 2px solid ${(props) => props.theme.fontColor};
-    text-align: center;
-    cursor: pointer;
-    &:hover {
-      background-color: lightgrey;
-    }
-
-    @media only screen and (min-width: 768px) {
-      font-size: ${(props) => props.theme.fontSize[2]};
-      letter-spacing: 0;
-    }
-  }
-`
 
 export default LandingPage
