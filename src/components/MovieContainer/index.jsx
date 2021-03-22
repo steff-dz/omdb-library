@@ -1,4 +1,5 @@
 import React from 'react'
+
 import styled from 'styled-components'
 
 const MovieContainer = ({ movie, starred, clickHandler }) => {
@@ -6,29 +7,26 @@ const MovieContainer = ({ movie, starred, clickHandler }) => {
   function handleEnterKey(evt, movie) {
     if (evt.key === 'Enter') {
       clickHandler(movie)
-    } else {
-      console.log('poop')
     }
   }
 
   return (
     <ArticleBase>
-      <label htmlFor="movie select check-box">
-        <i
-          id="movie select check-box"
-          tabIndex="0"
-          onKeyPress={(evt) => handleEnterKey(evt, movie)}
-          onClick={() => clickHandler(movie)}
-          className={starred ? 'fas fa-star' : 'far fa-star'}
-        ></i>
-      </label>
+      <i
+        aria-label="click to add to watchlist"
+        id="movie select check-box"
+        tabIndex="0"
+        onKeyPress={(evt) => handleEnterKey(evt, movie)}
+        onClick={() => clickHandler(movie)}
+        className={starred ? 'fas fa-star' : 'far fa-star'}
+      ></i>
 
       <img src={movie.Poster} alt={`poster for ${movie.Title}`}></img>
     </ArticleBase>
   )
 }
 
-const ArticleBase = styled.article`
+const ArticleBase = styled.div`
   border: 1px solid ${(props) => props.theme.fontColor};
   height: 210px;
   width: 150px;

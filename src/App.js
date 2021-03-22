@@ -10,7 +10,7 @@ import LandingPage from './pages/LandingPage'
 import WatchListPage from './pages/WatchListPage'
 
 function App() {
-  //The states that need to be accessible in other areas of the--------
+  //The states that need to be used in other areas of the app--------
   const [theme, setTheme] = useState('light')
   const [watchList, setWatchList] = useLocalStorage('watchlist', [])
   const [type, setType] = useState('movie')
