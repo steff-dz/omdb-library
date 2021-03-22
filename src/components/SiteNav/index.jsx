@@ -8,7 +8,7 @@ const SiteNav = ({ typeHandler }) => {
       <NavLink className="nav-item" to="/" onClick={() => typeHandler('movie')}>
         Movies
       </NavLink>
-      <NavLink className="nav-item" to="/" onClick={() => typeHandler('series')}>
+      <NavLink className="nav-item" to="/series" onClick={() => typeHandler('series')}>
         Series
       </NavLink>
       <NavLink className="nav-item" to="/mywatchlist">

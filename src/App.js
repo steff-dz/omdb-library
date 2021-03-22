@@ -7,11 +7,13 @@ import GlobalStyle from './components/GlobalStyle'
 import Header from './components/Header'
 import SiteNav from './components/SiteNav'
 import LandingPage from './pages/LandingPage'
+import SeriesPage from './pages/SeriesPage'
 import WatchListPage from './pages/WatchListPage'
 
 function App() {
   //The states that need to be used in other areas of the app--------
   const [theme, setTheme] = useState('light')
+  const [query, setQuery] = useState('star wars')
   const [watchList, setWatchList] = useLocalStorage('watchlist', [])
   const [type, setType] = useState('movie')
 
@@ -49,6 +51,14 @@ function App() {
           <Switch>
             <Route exact path="/">
               <LandingPage type={type} watchList={watchList} clickHandler={clickHandler} />
+            </Route>
+            <Route exact path="/series">
+              <SeriesPage
+                type={type}
+                query={query}
+                watchList={watchList}
+                clickHandler={clickHandler}
+              />
             </Route>
             <Route exact path="/mywatchlist">
               <WatchListPage watchList={watchList} clickHandler={clickHandler} />
