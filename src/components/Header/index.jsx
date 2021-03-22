@@ -41,7 +41,7 @@ const HeaderBase = styled.header`
       width: 60px;
       height: 20px;
       -webkit-appearance: none;
-      background-color: #333;
+      background-color: #272343;
 
       border-radius: 20px;
       box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
@@ -81,7 +81,7 @@ const HeaderBase = styled.header`
 
     input:checked[type='checkbox']::before {
       left: 40px;
-      background-color: #333;
+      background-color: #272343;
 
       @media only screen and (min-width: 768px) {
         left: 50px;

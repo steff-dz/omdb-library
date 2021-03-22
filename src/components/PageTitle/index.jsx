@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 
 const PageTitle = ({ title, spanWidth }) => {
   if (title === 'movie') {
@@ -9,13 +10,25 @@ const PageTitle = ({ title, spanWidth }) => {
   }
   return (
     <PageTitleBase spanWidth={spanWidth}>
-      {title}
-      <span></span>
+      <i>{title}</i>
+      <motion.span variants={spanVariants} initial="hidden" animate="visible"></motion.span>
     </PageTitleBase>
   )
 }
 
-export default PageTitle
+const spanVariants = {
+  hidden: {
+    opacity: 0,
+    width: 0,
+  },
+  visible: {
+    opacity: 1,
+    width: '100%',
+    transition: {
+      duration: 1,
+    },
+  },
+}
 
 const PageTitleBase = styled.h2`
   display: flex;
@@ -24,7 +37,7 @@ const PageTitleBase = styled.h2`
   width: 100%;
   padding: 15px 20px 10px 20px;
   color: ${(props) => props.theme.fontColor};
-  font-weight: 400;
+  font-weight: 200;
   span {
     /* width: ${(variants) => variants.spanWidth}; */
     width: 100%;
@@ -38,3 +51,4 @@ const PageTitleBase = styled.h2`
     padding: 15px 100px;
   }
 `
+export default PageTitle

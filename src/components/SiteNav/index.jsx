@@ -23,11 +23,15 @@ const NavBase = styled.nav`
   justify-content: center;
   gap: ${(props) => props.theme.spacing[3]};
 
-  .nav-item,
-  select {
+  .nav-item {
     text-decoration: none;
     color: ${(props) => props.theme.fontColor};
     font-size: ${(props) => props.theme.fontSize[1]};
+    font-weight: 600;
+
+    &:hover {
+      opacity: 0.7;
+    }
 
     @media only screen and (min-width: 768px) {
       font-size: ${(props) => props.theme.fontSize[2]};
