@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 
 const Header = ({ themeHandler }) => {
   return (
-    <HeaderBase>
+    <HeaderBase variants={headerVariants} initial="hidden" animate="visible">
       <label htmlFor="toggle display">
         <input id="toggle display" type="checkbox" onChange={() => themeHandler()} />
       </label>
@@ -12,7 +13,20 @@ const Header = ({ themeHandler }) => {
   )
 }
 
-const HeaderBase = styled.header`
+const headerVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 1,
+      ease: 'easeIn',
+    },
+  },
+}
+
+const HeaderBase = styled(motion.header)`
   text-align: center;
   color: ${(props) => props.theme.fontColor};
   /* position: relative; */

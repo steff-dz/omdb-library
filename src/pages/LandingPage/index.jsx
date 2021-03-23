@@ -46,6 +46,7 @@ const LandingPage = ({ type, watchList, clickHandler }) => {
     setQuery(e.target.value)
   }
 
+  //function to render out the movie items-------------------------------------------------------------
   function renderMovies() {
     return movies.map((el) => (
       <MovieContainer
@@ -75,10 +76,9 @@ const LandingPage = ({ type, watchList, clickHandler }) => {
           <i className="fas fa-search"></i>
         </button>
       </FormBase>
-      <PageTitle title={type} spanWidth={'50%'} />
+      <PageTitle title={type} />
       <MainBase>
         {movies ? renderMovies() : <PageSkeleton />}
-
         <ButtonContainer>
           <button aria-label="back 10 items" onClick={() => setPageCounter(pageCounter - 1)}>
             Back
@@ -99,7 +99,6 @@ const FormBase = styled.form`
   width: 100%;
   padding-left: ${(props) => props.theme.spacing[2]};
   input {
-    /* background-color: rgba(242, 242, 242, 0.178); */
     background-color: ${(props) => props.theme.pageBackground};
     width: 30%;
     font-size: 0.8rem;
@@ -129,7 +128,6 @@ const FormBase = styled.form`
 
 const ButtonContainer = styled.div`
   width: 100%;
-
   height: fit-content;
   display: flex;
   justify-content: center;
@@ -156,17 +154,3 @@ const ButtonContainer = styled.div`
 `
 
 export default LandingPage
-
-// {movies &&
-//   movies.map((el) => (
-//     <MovieContainer
-//       key={uuidv4()}
-//       movie={el}
-//       starred={Boolean(
-//         watchList.find((item) => {
-//           return item.imdbID === el.imdbID
-//         })
-//       )}
-//       clickHandler={clickHandler}
-//     />
-//   ))}

@@ -27,10 +27,15 @@ function App() {
 
   //function for toggling between themes------------------------------
   const themeHandler = () => {
-    if (theme === 'dark') {
-      setTheme('light')
-    } else {
-      setTheme('dark')
+    switch (theme) {
+      case 'dark':
+        setTheme('light')
+        break
+      case 'light':
+        setTheme('dark')
+        break
+      default:
+        setTheme('light')
     }
   }
 

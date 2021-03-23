@@ -2,14 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
-const PageTitle = ({ title, spanWidth }) => {
-  if (title === 'movie') {
-    title = 'Movies'
-  } else if (title === 'series') {
-    title = 'Series'
+const PageTitle = ({ title }) => {
+  switch (title) {
+    case 'movie':
+      title = 'Movies'
+      break
+    case 'series':
+      title = 'Series'
+      break
   }
+
   return (
-    <PageTitleBase spanWidth={spanWidth}>
+    <PageTitleBase>
       <i>{title}</i>
       <motion.span variants={spanVariants} initial="hidden" animate="visible"></motion.span>
     </PageTitleBase>
@@ -25,6 +29,7 @@ const spanVariants = {
     opacity: 1,
     width: '100%',
     transition: {
+      delay: 0.2,
       duration: 1,
     },
   },

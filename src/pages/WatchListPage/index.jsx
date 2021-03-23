@@ -7,7 +7,7 @@ const WatchListPage = ({ watchList, clickHandler }) => {
   return (
     <>
       <MainBase>
-        <PageTitle title={'My Watch List'} spanWidth={'70%'}></PageTitle>
+        <PageTitle title={'My Watch List'}></PageTitle>
         {watchList &&
           watchList.map((el) => (
             <MovieContainer

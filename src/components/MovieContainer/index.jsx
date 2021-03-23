@@ -13,7 +13,7 @@ const MovieContainer = ({ movie, starred, clickHandler }) => {
 
   return (
     <ArticleBase tabIndex="0" variants={containerVariants} whileHover="popOut" whileFocus="popOut">
-      <motion.i
+      <i
         aria-label="click to add to your watchlist"
         role="checkbox"
         aria-checked={`${starred}`}
@@ -22,7 +22,7 @@ const MovieContainer = ({ movie, starred, clickHandler }) => {
         onKeyPress={(evt) => handleEnterKey(evt, movie)}
         onClick={() => clickHandler(movie)}
         className={starred ? 'fas fa-star' : 'far fa-star'}
-      ></motion.i>
+      ></i>
 
       <img src={movie.Poster} alt={`poster for ${movie.Title}`}></img>
     </ArticleBase>
